@@ -1,32 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import { AddressDataSource } from './../services/address-datasource';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { FormControl, FormArray, FormGroup, Validators } from '@angular/forms';
-import { CoreService } from './../services/core.service';
-import { BehaviorSubject } from 'rxjs';
+import { AddressDataService } from '../services/address-data.service';
 
-import { Address } from '../models/address';
+import { Address, SortAddress } from '../models/';
+import { MatSort } from '@angular/material/sort';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-data-table',
   templateUrl: './data-table.component.html',
   styleUrls: ['./data-table.component.scss']
 })
-export class DataTableComponent implements OnInit {
+export class DataTableComponent implements OnInit, AfterViewInit {
+
+  dataSource: AddressDataSource;
   columnsToDisplay: string[] = [ 'streetNumber', 'street', 'city', 'state', 'zipCode' ];
-  addressList: Address[];
   controls: FormArray;
   toGroups: FormGroup[];
 
-  list$: BehaviorSubject<Address[]>;
+  @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private service: CoreService) {
+  constructor(private addressDataService: AddressDataService) {
   }
 
   ngOnInit(): void {
-    this.service.fetchAddressList().subscribe((response: Address[]) => {
-      this.addressList = response;
-      this.list$ = new BehaviorSubject(this.addressList);
+    this.dataSource = new AddressDataSource(this.addressDataService);
+    this.dataSource.loadAddresses();
 
-      this.toGroups = response.map(entity => {
+    this.dataSource.connect().subscribe(values => {
+      const toGroups = values.map(entity => {
         return new FormGroup({
           streetNumber:  new FormControl(entity.streetNumber, Validators.required),
           street: new FormControl(entity.street, Validators.required),
@@ -36,33 +39,36 @@ export class DataTableComponent implements OnInit {
         }, {updateOn: 'blur'});
       });
 
-      this.controls = new FormArray(this.toGroups);
+      this.controls = new FormArray(toGroups);
     });
+
   }
 
-  updateField(index, field) {
-    const control = this.getControl(index, field);
-    if (control.valid) {
-      this.update(index, field, control.value);
-    }
-
-   }
-
-   update(index, field, value) {
-    this.addressList = this.addressList.map((e, i) => {
-      if (index === i) {
-        return {
-          ...e,
-          [field]: value
-        };
-      }
-      return e;
-    });
-    this.list$.next(this.addressList);
+  ngAfterViewInit() {
+    this.sort.sortChange.pipe(
+      tap(
+        (column: SortAddress) => this.getAddressPage(column.active, column.direction)
+      )
+    )
+    .subscribe();
   }
 
   getControl(index, fieldName) {
     return this.controls.at(index).get(fieldName) as FormControl;
   }
 
+  updateField(index, field) {
+    const control = this.getControl(index, field);
+    if (control.valid) {
+      this.dataSource.updateAddresses(index, field, control.value);
+    }
+  }
+
+  getAddressPage(column: string, direction: string) {
+     this.dataSource.getAddresses(column, direction, 1);
+  }
+
+  // sendAddressData(data) {
+  //   this.service.sendAddressList(data);
+  // }
 }
