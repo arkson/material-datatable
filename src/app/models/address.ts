@@ -5,3 +5,8 @@ export interface Address {
     state: string;
     zipCode: string;
 }
+
+export interface SortAddress {
+    active: string;
+    direction: string;
+}
