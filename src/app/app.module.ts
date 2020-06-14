@@ -1,4 +1,4 @@
-import { CoreService } from './services/core.service';
+import { AddressDataService } from './services/address-data.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
@@ -36,7 +36,7 @@ import { EditableComponent } from './directives/editable.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [ CoreService ],
+  providers: [ AddressDataService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
