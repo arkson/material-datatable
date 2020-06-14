@@ -3,13 +3,13 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "prestart": "cd stubbs && node data-parser && stubby -s 1500 -d stubby.json -w",
-    "start": "ng serve",
+    "prestart": "cd stubbs && node data-parser && stubby -s 1500 -d stubby.yaml -w",
+    "start": "ng serve --open",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "stubs": "stubby -s 1500 -d stubbs/stubby.json -w"
+    "stubs": "stubby -s 1500 -d stubbs/stubby.yaml -w"
   },
   "private": true,
   "dependencies": {

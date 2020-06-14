@@ -1,0 +1,18 @@
+- request:
+    url: ^/api/v1/addresses$
+    method: GET
+    query:
+      page: 1|2|3|4|5
+      column: default|streetNumber|street|city|state|zipCode
+  response:
+    status: 200
+    file: addresses/<% query.column %>/<% query.page %>.json
+
+- request:
+    url: ^/api/v1/addresses$
+    method: POST
+  response:
+    status: 200
+    latency: 1000
+    body: Your request was successfully processed!
+

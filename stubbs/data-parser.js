@@ -39,7 +39,7 @@ function main() {
         let regExp = /([^\s]+)+ (.+?),+ (.+?),+ ([^\s]+)+ ([^\s]+$)/;
 
         // read contents of the file
-        const data = fs.readFileSync('addresses2.txt', 'UTF-8');
+        const data = fs.readFileSync('addresses.txt', 'UTF-8');
 
         // split the contents by new line
         const lines = data.split(/\r?\n/);
@@ -67,11 +67,11 @@ function main() {
 
         // divide addresses in parts & save it into json files
         storeDataChunks(defautAddresses, 'addresses/default');
-        storeDataChunks(sortedStreetNumbers, 'addresses/street-numbers');
-        storeDataChunks(sortedStreets, 'addresses/streets');
-        storeDataChunks(sortedCities, 'addresses/cities');
-        storeDataChunks(sortedStates, 'addresses/states');
-        storeDataChunks(sortedZipCodes, 'addresses/zip-codes');
+        storeDataChunks(sortedStreetNumbers, 'addresses/streetNumber');
+        storeDataChunks(sortedStreets, 'addresses/street');
+        storeDataChunks(sortedCities, 'addresses/city');
+        storeDataChunks(sortedStates, 'addresses/state');
+        storeDataChunks(sortedZipCodes, 'addresses/zipCode');
 
     } catch (err) {
         console.error('Error: ', err);
