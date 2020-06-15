@@ -5,7 +5,7 @@ I used the material table library to view, edit and order the addresses, also im
 
 I tried to implement a virtual scroll to render only the data visible in the viewport but I could not complete it in the requested time for that reason I'm using a small sample of the original file. I also could not complete a proper set of unit tests for my code.
 
-Thanks for the opportunity, I had fun doing this challenge and any suggestion or feedback is welcome!
+Thanks for taking the time of reading this, I had fun doing this challenge and any suggestion or feedback is welcome!
 
 Run `npm instal`
 
