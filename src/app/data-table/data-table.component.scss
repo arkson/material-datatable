@@ -1,0 +1,38 @@
+div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border: 1px solid #D1D8DD;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    font-family: 'Roboto', sans-serif;
+    h2 {
+        line-height: 26px;
+        color: #36414C;
+        font-size: 22px;
+        margin: 0;
+    }
+    button {
+        background: #175641;
+        border-radius: 4px;
+        color: white;
+        width: 129px;
+        height: 40px;
+        border: none;
+        font-weight: 500;
+        font-size: .75rem;
+    }
+    button:hover { cursor: pointer; }
+}
+
+::ng-deep snack-bar-container.custom-snackbar {
+    background: #008000;
+    color: white;
+    justify-content: flex-start;
+  }
+
+::ng-deep .custom-snackbar .mat-simple-snackbar {
+    background: #008000;
+    color: white;
+}

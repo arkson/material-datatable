@@ -1,67 +1,101 @@
-<mat-table class="address-table mat-elevation-z8" [dataSource]="dataSource" matSort>
+<div>
+    <h2>Address List </h2>
+    <form name="form" (ngSubmit)="onSubmit()"><button type="submit">Send File</button></form>
+</div>
 
-	<!-- streetNumber Column -->
-	<ng-container matColumnDef="streetNumber">
-		<mat-header-cell *matHeaderCellDef mat-sort-header> Street Number </mat-header-cell>
-		<mat-cell *matCellDef="let element"> {{element.streetNumber}} </mat-cell>
-	</ng-container>
+<cdk-virtual-scroll-viewport [style.height.px]="400">
+    <mat-table [dataSource]="dataSource" matSort>
 
-	<!-- street Column -->
-	<ng-container matColumnDef="street">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Street </mat-header-cell>
-        <mat-cell *matCellDef="let element;let index = index">
-        <editable (update)="updateField(index, 'street')">
-            <ng-template viewMode>
-                {{element.street}}
-            </ng-template>
-            <ng-template editMode>
-                <mat-form-field class="example-full-width">
-                    <input matInput [formControl]="getControl(index, 'street')">
-                    <mat-error *ngIf="getControl(index, 'street').hasError('required')">
-                    Field is <strong>required</strong>
-                    </mat-error>
-                </mat-form-field>
-            </ng-template>
-        </editable>
-        </mat-cell>
-    </ng-container>
+        <!-- streetNumber Column -->
+        <ng-container matColumnDef="streetNumber">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Street Number </mat-header-cell>
+            <mat-cell *matCellDef="let element;let index = index">
+                <editable (update)="updateField(index, 'streetNumber')">
+                    <ng-template viewMode>
+                        {{element.streetNumber}}
+                    </ng-template>
+                    <ng-template editMode>
+                        <mat-form-field>
+                            <input matInput [formControl]="getControl(index, 'streetNumber')">
+                        </mat-form-field>
+                    </ng-template>
+                </editable>
+            </mat-cell>
+        </ng-container>
 
-  <!-- city Column -->
-  <ng-container matColumnDef="city">
-    <mat-header-cell *matHeaderCellDef mat-sort-header> City </mat-header-cell>
-    <mat-cell *matCellDef="let element;let index = index">
-      	<editable (update)="updateField(index, 'city')">
-            <ng-template viewMode>
-                {{element.city}}
-            </ng-template>
-            <ng-template editMode>
-                <input  [formControl]="getControl(index, 'city')" focusable editableOnEnter>
-            </ng-template>
-      </editable>
-    </mat-cell>
-  </ng-container>
+        <!-- street Column -->
+        <ng-container matColumnDef="street">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Street </mat-header-cell>
+            <mat-cell *matCellDef="let element;let index = index">
+                <editable (update)="updateField(index, 'street')">
+                    <ng-template viewMode>
+                        {{element.street}}
+                    </ng-template>
+                    <ng-template editMode>
+                        <mat-form-field>
+                            <input matInput [formControl]="getControl(index, 'street')">
+                        </mat-form-field>
+                    </ng-template>
+                </editable>
+            </mat-cell>
+        </ng-container>
 
-    <!-- zipCode Column -->
-    <ng-container matColumnDef="zipCode">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Zip Code </mat-header-cell>
-        <mat-cell *matCellDef="let element;let index = index">
-        <editable (update)="updateField(index, 'zipCode')">
-            <ng-template viewMode>
-                {{element.zipCode}}
-            </ng-template>
-            <ng-template editMode>
-                <input  [formControl]="getControl(index, 'zipCode')" focusable editableOnEnter>
-            </ng-template>
-        </editable>
-        </mat-cell>
-    </ng-container>
+        <!-- city Column -->
+        <ng-container matColumnDef="city">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> City </mat-header-cell>
+            <mat-cell *matCellDef="let element;let index = index">
+                <editable (update)="updateField(index, 'city')">
+                    <ng-template viewMode>
+                        {{element.city}}
+                    </ng-template>
+                    <ng-template editMode>
+                        <mat-form-field>
+                            <input matInput [formControl]="getControl(index, 'city')" focusable editableOnEnter>
+                        </mat-form-field>
+                    </ng-template>
+                </editable>
+            </mat-cell>
+        </ng-container>
 
-  	<!-- state Column -->
-	<ng-container matColumnDef="state">
-		<mat-header-cell *matHeaderCellDef mat-sort-header> State </mat-header-cell>
-		<mat-cell *matCellDef="let element"> {{element.state}} </mat-cell>
-	</ng-container>
+        <!-- zipCode Column -->
+        <ng-container matColumnDef="zipCode">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Zip Code </mat-header-cell>
+            <mat-cell *matCellDef="let element;let index = index">
+                <editable (update)="updateField(index, 'zipCode')">
+                    <ng-template viewMode>
+                        {{element.zipCode}}
+                    </ng-template>
+                    <ng-template editMode>
+                        <mat-form-field>
+                            <input matInput [formControl]="getControl(index, 'zipCode')" focusable editableOnEnter>
+                        </mat-form-field>
+                    </ng-template>
+                </editable>
+            </mat-cell>
+        </ng-container>
 
-    <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
-</mat-table>
+        <!-- state Column -->
+        <ng-container matColumnDef="state">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> State </mat-header-cell>
+            <mat-cell *matCellDef="let element;let index = index">
+                <editable (update)="updateField(index, 'state')">
+                    <ng-template viewMode>
+                        {{element.state}}
+                    </ng-template>
+                    <ng-template editMode>
+                        <mat-form-field>
+                            <input matInput [formControl]="getControl(index, 'state')" focusable editableOnEnter>
+                        </mat-form-field>
+                    </ng-template>
+                </editable>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+        <ng-template let-row matRowDef cdkVirtualFor [matRowDefColumns]="columnsToDisplay" [cdkVirtualForOf]="dataSource">
+            <mat-row></mat-row>
+        </ng-template>
+    </mat-table>
+</cdk-virtual-scroll-viewport>
+
+
