@@ -53,7 +53,7 @@ export class TableVirtualScrollStrategy implements VirtualScrollStrategy {
   public setScrollHeight(rowHeight: number, headerHeight: number) {
     this.scrollHeight = rowHeight;
     this.scrollHeader = headerHeight;
-    console.log('setScrollHeight', this.viewport);
+
     this.updateContent(this.viewport);
   }
 

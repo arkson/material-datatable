@@ -39,7 +39,7 @@ function main() {
         let regExp = /([^\s]+)+ (.+?),+ (.+?),+ ([^\s]+)+ ([^\s]+$)/;
 
         // read contents of the file
-        const data = fs.readFileSync('address2.txt', 'UTF-8');
+        const data = fs.readFileSync('address.txt', 'UTF-8');
 
         // split the contents by new line
         const lines = data.split(/\r?\n/);
