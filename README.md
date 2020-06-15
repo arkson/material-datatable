@@ -7,7 +7,7 @@ I tried to implement a virtual scroll to render only the data visible in the vie
 
 Thanks for taking the time of reading this, I had fun doing this challenge and any suggestion or feedback is welcome!
 
-Run `npm instal`
+Run `npm install`
 
 ## Stubby server
 
